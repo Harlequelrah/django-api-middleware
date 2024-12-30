@@ -15,6 +15,9 @@ from pathlib import Path
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
 
+import os
+from dotenv import load_dotenv
+load_dotenv()
 
 # Quick-start development settings - unsuitable for production
 # See https://docs.djangoproject.com/en/5.1/howto/deployment/checklist/
@@ -37,6 +40,8 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+    'todo',
+    'rest_framework'
 ]
 
 MIDDLEWARE = [
@@ -72,11 +77,18 @@ WSGI_APPLICATION = 'demomiddleware.wsgi.application'
 
 # Database
 # https://docs.djangoproject.com/en/5.1/ref/settings/#databases
+USERNAME=os.getenv('DATABASE_USERNAME')
+PASSWORD=os.getenv('DATABASE_PASSWORD')
 
 DATABASES = {
+
     'default': {
-        'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': BASE_DIR / 'db.sqlite3',
+        'ENGINE': 'django.db.backends.mysql',
+        'NAME': 'django_demomiddleware',
+        'USER':USERNAME,
+        'PASSWORD':PASSWORD,
+        'HOST':'localhost',
+        'PORT':'3306'
     }
 }
 

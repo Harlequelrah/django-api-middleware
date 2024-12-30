@@ -1,0 +1,19 @@
+1. Créer un ficher .env à la racine du projet
+et y mettre puis complèter :
+
+DATABASE_USERNAME=
+DATABASE_PASSWORD=
+
+2. créer un environnement virtuelle puis l'activer :
+- soit : pip install virtualenv puis virtualenv env
+- soit : python -m venv env
+
+3. installer les dépendances avec :
+pip install -r requirements.txt
+
+4. executer les migrations
+python manage.py migrate
+
+5. creer un compte superutilisateur
+python manage.py createsuperuser
+
