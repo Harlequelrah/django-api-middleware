@@ -2,7 +2,7 @@ from django.shortcuts import render
 from rest_framework.viewsets import ModelViewSet, ReadOnlyModelViewSet
 from .models import ToDo
 from .serializers import ToDoSerializer
-class ToDoViewSet(ReadOnlyModelViewSet):
+class ToDoViewSet(ModelViewSet):
     serializer_class = ToDoSerializer
     def get_queryset(self):
         queryset= ToDo.objects.all()
