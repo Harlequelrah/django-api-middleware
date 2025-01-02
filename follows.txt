@@ -11,9 +11,12 @@ DATABASE_PASSWORD=
 3. installer les dépendances avec :
 pip install -r requirements.txt
 
-4. executer les migrations
+4. allez créée la base de donnée django_demomiddleware si c'est pas automatique :
+
+
+5. executer les migrations
 python manage.py migrate
 
-5. creer un compte superutilisateur
+6. creer un compte superutilisateur
 python manage.py createsuperuser
 

@@ -1,0 +1,17 @@
+{% extends "base.html" %}
+{% block content %}
+{% if not todos %}
+    <p>Aucun todo n'est enregistré.</p>
+{% endif %}
+
+<h1>To-Do List</h1>
+{% for todo in todos %}
+<li>{{todo.title}}</li>
+<li>{{todo.description}}</li>
+{% if todo.id %}
+    <a href="{% url 'todo-detail' todo.id %}">Details</a>
+{% else %}
+    <p>Invalid ToDo</p>
+{% endif %}
+{%  endfor %}
+{% endblock content %}

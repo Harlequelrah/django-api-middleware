@@ -16,12 +16,14 @@ Including another URLconf
 """
 from django.contrib import admin
 from django.urls import include, path
-from todo.views import ToDoViewSet
+from todo.views import ToDoViewSet , get_all_todo , get_one_todo
 from rest_framework import routers
 router=routers.SimpleRouter()
 router.register('todo',ToDoViewSet,basename='todo')
 urlpatterns = [
-    path('admin/', admin.site.urls),
-    path('api-auth/',include('rest_framework.urls')),
-    path('api/',include(router.urls))
+    path("admin/", admin.site.urls),
+    path("api-auth/", include("rest_framework.urls")),
+    path("api/", include(router.urls)),
+    path("todo", get_all_todo, name="todo-list"),
+    path("todo/<int:todo_id>/", get_one_todo, name="todo-detail"),
 ]

@@ -1,0 +1,8 @@
+{% extends "base.html" %}
+{% block content %}
+<h1>{{ todo.title }}</h1>
+<p>{{ todo.description }}</p>
+<p>Status: {% if todo.is_done %}Terminé{% else %}Non terminé{% endif %}</p>
+
+
+{% endblock content %}
