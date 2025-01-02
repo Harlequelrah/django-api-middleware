@@ -32,7 +32,7 @@ def get_all_todo(request):
 
                 serializer = ToDoSerializer(data, many=True)
                 return render(
-                        request, "todo_list.html", {"todos": serializer.data}
+                        request, "todo/todo_list.html", {"todos": serializer.data}
                     )
 
             except httpx.HTTPStatusError as exc:
@@ -46,7 +46,7 @@ def get_all_todo(request):
                 message = f"Connection Error: {exc}"
                 messages.error(request, message)
 
-        return render(request, "todo_list.html", {"todos": []})
+        return render(request, "todo/todo_list.html", {"todos": []})
 
 
 def get_one_todo(request, todo_id: int):
@@ -60,7 +60,7 @@ def get_one_todo(request, todo_id: int):
 
                 serializer = ToDoSerializer(data)
                 return render(
-                        request, "todo_detail.html", {"todo": serializer.data}
+                        request, "todo/todo_detail.html", {"todo": serializer.data}
                     )
 
             except httpx.HTTPStatusError as exc:
@@ -74,7 +74,7 @@ def get_one_todo(request, todo_id: int):
                 message = f"Connection Error: {exc}"
                 messages.error(request, message)
 
-        return render(request, "todo_detail.html", {"todo": ToDo()})
+        return render(request, "todo/todo_detail.html", {"todo": ToDo()})
 
 
 async def delete_todo(request, todo_id:int):
@@ -127,7 +127,6 @@ async def update_todo(request, todo_id:int):
                 try:
                     response = await client.put(api_url, json=json_data)
                     response.raise_for_status()  # Vérifie les erreurs HTTP (4xx, 5xx) et lance des exceptions  .
-                    data = response.json()
                 except httpx.HTTPStatusError as exc:
                     message = (
                         f"HTTP Error: {exc.response.status_code}, "
@@ -137,11 +136,10 @@ async def update_todo(request, todo_id:int):
                 except httpx.RequestError as exc:
                     message = f"Connection Error: {exc}"
                     messages.error(request, message)
-
+                return redirect("todo-list")
     else:
         form = ToDoForm(data)
-
-    return render(request, 'todo_update.html', {'form': form})
+    return render(request, 'todo/todo_update.html', {'form': form,'todo_id':todo_id})
 
 async def create_todo(request):
     if request.method == 'POST':
@@ -174,4 +172,8 @@ async def create_todo(request):
     else:
         form = ToDoForm()
 
-    return render(request, 'todo/create.html', {'form': form})
+    return render(
+        request,
+        "todo/todo_create.html",
+        {"form": form}
+    )

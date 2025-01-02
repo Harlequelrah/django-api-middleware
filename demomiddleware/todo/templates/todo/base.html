@@ -1,0 +1,25 @@
+{% load  static %}
+<html>
+    <head>
+        <meta charset="utf-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        {% block style %}
+        {% endblock style %}
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <script src="https://cdn.tailwindcss.com"></script>
+
+    </head>
+    <body>
+        <body class="bg-gray-100 font-sans">
+    <!-- Navbar -->
+    <nav class="bg-blue-600 p-4">
+        <div class="container mx-auto flex justify-between items-center">
+            <a href="{% url  'todo-list' %}" class="text-white text-lg font-bold">To-Do List</a>
+            <a href="{% url  'create_todo' %}" class="text-white text-lg font-bold">CREATE TODO</a>
+        </div>
+    </nav>
+        {% block content %}
+        {% endblock content %}
+
+    </body>
+</html>

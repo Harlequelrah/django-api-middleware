@@ -1,0 +1,24 @@
+{% extends "todo/base.html" %}
+{% block content %}
+<h1>{{ todo.title }}</h1>
+<p>{{ todo.description }}</p>
+<p>Status: {% if todo.is_done %}Terminé{% else %}Non terminé{% endif %}</p>
+
+        <div class="mt-8 bg-white shadow-md rounded p-6">
+            <h2 class="text-xl font-bold text-gray-800 mb-4">Your To-Do List</h2>
+            <ul class="space-y-4">
+                <li class="flex justify-between items-center bg-gray-50 p-4 rounded shadow">
+                    <span>To-Do Operations</span>
+                    <div>
+                        <button class="bg-green-500 text-white px-3 py-1 rounded hover:bg-green-400">
+                            <a href="{% url  'update_todo' todo.id %}">Edit</a>
+                        </button>
+                        <button class="bg-red-500 text-white px-3 py-1 rounded hover:bg-red-400">
+                            <a href="{% url  'delete_todo' todo.id %}">Delete</a>
+                        </button>
+                    </div>
+                </li>
+                <!-- Dynamically add more items here -->
+            </ul>
+        </div>
+{% endblock content %}

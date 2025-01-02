@@ -14,15 +14,16 @@ Including another URLconf
     1. Import the include() function: from django.urls import include, path
     2. Add a URL to urlpatterns:  path('blog/', include('blog.urls'))
 """
-from django.contrib import admin
-from django.urls import include, path
-from todo.views import ToDoViewSet , get_all_todo , get_one_todo
-from rest_framework import routers
-router=routers.SimpleRouter()
-router.register('todo',ToDoViewSet,basename='todo')
+
+
+from django.urls import path
+from todo import views
+
+
 urlpatterns = [
-    path("admin/", admin.site.urls),
-    path("api-auth/", include("rest_framework.urls")),
-    path("api/", include(router.urls)),
-    path("todo/",include('todo.urls'))
+    path("", views.get_all_todo, name="todo-list"),
+    path("<int:todo_id>/", views.get_one_todo, name="todo-detail"),
+    path("create/", views.create_todo, name="create_todo"),
+    path("update/<int:todo_id>/", views.update_todo, name="update_todo"),
+    path("delete/<int:todo_id>/", views.delete_todo, name="delete_todo"),
 ]
