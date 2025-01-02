@@ -92,7 +92,7 @@ async def delete_todo(request, todo_id:int):
         except httpx.RequestError as exc:
             message = f"Connection Error: {exc}"
             messages.error(request, message)
-    return redirect("todo_list")
+    return redirect("todo-list")
 
 async def update_todo(request, todo_id:int):
     api_url = f"{SERVER}/{todo_id}/"
@@ -170,7 +170,7 @@ async def create_todo(request):
                 except httpx.RequestError as exc:
                     message = f"Connection Error: {exc}"
                     messages.error(request, message)
-                return redirect("todo_list")
+                return redirect("todo-list")
     else:
         form = ToDoForm()
 
