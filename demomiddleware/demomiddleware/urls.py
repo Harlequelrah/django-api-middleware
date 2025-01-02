@@ -18,10 +18,15 @@ from django.contrib import admin
 from django.urls import include, path
 from todo.views import ToDoViewSet
 from rest_framework import routers
+from todo import views
 router=routers.SimpleRouter()
 router.register('todo',ToDoViewSet,basename='todo')
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('api-auth/',include('rest_framework.urls')),
-    path('api/',include(router.urls))
+    path('api/',include(router.urls)),
+    path('create/', views.create_todo, name='create_todo'),
 ]
+
+
+
